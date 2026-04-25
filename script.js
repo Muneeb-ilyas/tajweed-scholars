@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // 1. Typewriter Effect Logic (English LTR)
     const typewriterElement = document.querySelector('.typewriter-text');
     if (typewriterElement) {
         const textToType = typewriterElement.getAttribute('data-text');
@@ -10,20 +9,17 @@ document.addEventListener("DOMContentLoaded", () => {
             if (index < textToType.length) {
                 typewriterElement.innerHTML += textToType.charAt(index);
                 index++;
-                setTimeout(typeWriter, 40); // Speed of typing
+                setTimeout(typeWriter, 40); 
             } else {
-                // Remove the blinking cursor line when finished
                 typewriterElement.style.borderRight = 'none'; 
             }
         }
         
-        // Start typing slightly after page load
         setTimeout(typeWriter, 500); 
     }
 
-    // 2. Scroll Animation Observer (Reveals elements smoothly)
     const observerOptions = {
-        threshold: 0.1, // Trigger when 10% visible
+        threshold: 0.1, 
         rootMargin: "0px 0px -50px 0px"
     };
 
@@ -31,17 +27,15 @@ document.addEventListener("DOMContentLoaded", () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target); // Run once
+                observer.unobserve(entry.target); 
             }
         });
     }, observerOptions);
 
-    // Attach observer to all animated elements
     document.querySelectorAll('.anim-blur-in, .anim-pop-in').forEach(el => {
         observer.observe(el);
     });
 
-    // 3. Mobile Hamburger Menu Toggle Logic
     const mobileBtn = document.getElementById('mobile-toggle');
     const navWrapper = document.getElementById('nav-wrapper');
 
@@ -60,18 +54,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// 4. Modal (Popup) Logic for the Certificate
 function openModal() {
     document.getElementById('license-modal').classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; // Prevents background from scrolling
+    document.body.style.overflow = 'hidden'; 
 }
 
 function closeModal() {
     document.getElementById('license-modal').classList.add('hidden');
-    document.body.style.overflow = 'auto'; // Restores background scrolling
+    document.body.style.overflow = 'auto'; 
 }
 
-// Close modal when user presses the "Escape" key
 document.addEventListener('keydown', function (event) { 
     if (event.key === "Escape") closeModal(); 
 });
