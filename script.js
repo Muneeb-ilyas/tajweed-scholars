@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
     const typewriterElement = document.querySelector('.typewriter-text');
     if (typewriterElement) {
         const textToType = typewriterElement.getAttribute('data-text');
@@ -51,38 +50,28 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-});
 
-function openModal() {
-    document.getElementById('license-modal').classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; 
-}
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            const icon = question.querySelector('i');
+            
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                if(ans !== answer) {
+                    ans.classList.remove('open');
+                    ans.previousElementSibling.querySelector('i').style.transform = 'rotate(0deg)';
+                }
+            });
 
-function closeModal() {
-    document.getElementById('license-modal').classList.add('hidden');
-    document.body.style.overflow = 'auto'; 
-}
-
-document.addEventListener('keydown', function (event) { 
-    if (event.key === "Escape") closeModal(); 
-});    });
-
-    const mobileBtn = document.getElementById('mobile-toggle');
-    const navWrapper = document.getElementById('nav-wrapper');
-
-    if (mobileBtn && navWrapper) {
-        mobileBtn.addEventListener('click', () => {
-            navWrapper.classList.toggle('active');
-            const icon = mobileBtn.querySelector('i');
-            if (navWrapper.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-xmark');
+            answer.classList.toggle('open');
+            if(answer.classList.contains('open')) {
+                icon.style.transform = 'rotate(180deg)';
             } else {
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
+                icon.style.transform = 'rotate(0deg)';
             }
         });
-    }
+    });
 });
 
 function openModal() {
